@@ -7,10 +7,17 @@
 		},
 		"movementSpeed" : 1
 	},
-	"componentsType" : [
+	"componentsClassName" : [
 		"URFLeague.Game.Entity.Attachable.Component.PositionComponent",
 		"URFLeague.Game.Entity.Attachable.Component.MovementComponent",
 		"URFLeague.Game.Entity.Attachable.Component.RenderOrientationComponent",
 		"URFLeague.Game.Entity.Attachable.Component.MouseControlComponent"
+	],
+	"skillDataMap" : [
+		{
+			"className" : "URFLeague.Game.Entity.Attachable.Skill.Dash", 
+			"dataClassName" : "URFLeague.Game.Entity.Attachable.Skill.DashData",
+			"jsonDataPath" : "Data/Skills/normalDash"
+		}
 	]
 }
