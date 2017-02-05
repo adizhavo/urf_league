@@ -8,15 +8,12 @@ namespace URFLeague.Game.Entity.Component
     {
         private ChampionData cd;
 
-        public MovementComponent(IEntity parent) : base(parent) { }
+        public MovementComponent(string cmpId, IEntity parent) : base(cmpId, parent) { }
 
         #region implemented abstract members of EntityComponent
         public override void Boot()
         {
-            if (base.data == null)
-                throw new NullReferenceException("Entity data is null");
-
-            cd = ((ChampionData)base.data);
+            cd = ((ChampionData)componentData.parentData);
 
             if (cd == null)
                 throw new InvalidCastException("IEntity data is not a champion data");

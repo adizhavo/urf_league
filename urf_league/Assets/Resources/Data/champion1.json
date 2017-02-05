@@ -9,8 +9,8 @@
 	},
 	"componentsId" : [
 		"Position",
-		"MouseControl",
 		"Movement",
-		"RenderOrientation"
+		"RenderOrientation",
+		"MouseControl"
 	]
 }

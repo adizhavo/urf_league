@@ -2,23 +2,33 @@
 
 namespace URFLeague.Game.Entity.Component
 {
+    public class ComponentData : IEntityData
+    {
+        public string id;
+        public IEntityData parentData;
+    }
+
     public abstract class EntityComponent : IEntity 
     {
-        private IEntity parent;
+        protected ComponentData componentData;
 
-        public EntityComponent(IEntity parent)
+        public EntityComponent(string cmpId, IEntity parent)
         {
             if (parent == null) 
-                throw new ArgumentNullException("Parent entity", "Parent cennot be null");
+                throw new ArgumentNullException("Parent entity", "Parent cannot be null");
 
-            this.parent = parent;
+            componentData = new ComponentData
+                            {
+                                id = cmpId,
+                                parentData = parent.data
+                            };
         }
 
         #region IEntity implementation
 
         public IEntityData data
         {
-            get { return parent.data; }
+            get { return componentData; }
         }
 
         public abstract void Boot();
