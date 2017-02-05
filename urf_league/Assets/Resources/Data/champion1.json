@@ -2,11 +2,12 @@
 	"championStats" : 
 	{
 		"modelPath" : "Models/Champion1",
-		"worldPosition" : { 
+		"startPosition" : { 
 			"x" : 0.0, "y" : 0.0, "z" : 0.0
 		}
 	},
 	"componentsId" : [
-		"ChampPoistion"
+		"ChampPosition",
+		"MouseControl"
 	]
 }

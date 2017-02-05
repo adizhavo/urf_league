@@ -1,5 +1,6 @@
 ﻿using URFLeague.Config;
 using URFLeague.Game.Entity;
+using URFLeague.Game.Entity.Component;
 
 namespace URFLeague.Game.Factory
 {
@@ -11,6 +12,9 @@ namespace URFLeague.Game.Factory
             {
                 case DataConfig.CHAMP_REND_COMP : 
                     return new PositionComponent(attachedTo);
+
+                case DataConfig.MOUSE_CONTR_COMP : 
+                    return new MouseControlComponent(attachedTo);
                 
                 default :
                     UnityEngine.Debug.LogError(componentId + " component requested is not registered in the factory, will return null.");

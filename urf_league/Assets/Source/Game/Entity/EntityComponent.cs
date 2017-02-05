@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace URFLeague.Game.Entity
+namespace URFLeague.Game.Entity.Component
 {
     public abstract class EntityComponent : IEntity 
     {

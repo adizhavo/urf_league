@@ -8,7 +8,10 @@ namespace URFLeague.Game.Entity
     {
         public string modelPath;
         public GameObject gameObject;
-        public WorldCoordinates worldPosition;
+        public WorldCoordinates startPosition;
+        public WorldCoordinates currentPosition;
+        public WorldCoordinates targetPosition;
+        public float movementSpeed;
     }
 
     [Serializable]
