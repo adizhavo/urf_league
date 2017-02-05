@@ -1,19 +1,18 @@
 ﻿using System;
 using UnityEngine;
 using URFLeague.Config;
+using URFLeague.Game.Entity.Attachable;
 
-namespace URFLeague.Game.Entity.Component
+namespace URFLeague.Game.Entity.Attachable.Component
 {
-    public class MovementComponent : EntityComponent
+    public class MovementComponent : Attachable<AttachableEntityData>
     {
         private ChampionData cd;
 
-        public MovementComponent(string cmpId, IEntity parent) : base(cmpId, parent) { }
-
-        #region implemented abstract members of EntityComponent
+        #region implemented abstract members of Attachable
         public override void Boot()
         {
-            cd = ((ChampionData)componentData.parentData);
+            cd = ((ChampionData)adata.parentData);
 
             if (cd == null)
                 throw new InvalidCastException("IEntity data is not a champion data");
