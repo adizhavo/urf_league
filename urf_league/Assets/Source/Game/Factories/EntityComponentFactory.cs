@@ -18,6 +18,9 @@ namespace URFLeague.Game.Factory
 
                 case DataConfig.MOVEMENT_COMP : 
                     return new MovementComponent(attachedTo);
+
+                case DataConfig.REND_ORIENT_COMP : 
+                    return new RenderOrientationComponent(attachedTo);
                 
                 default :
                     UnityEngine.Debug.LogError(componentId + " component requested is not registered in the factory, will return null.");
