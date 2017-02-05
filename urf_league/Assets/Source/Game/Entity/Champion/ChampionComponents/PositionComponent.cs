@@ -25,13 +25,13 @@ namespace URFLeague.Game.Entity.Component
         public override void Awake()
         {
             cd.gameObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>(cd.modelPath));
-            cd.gameObject.transform.position = new Vector3(cd.startPosition.x, cd.startPosition.y, cd.startPosition.z);
+            cd.gameObject.transform.position = cd.startPosition.toVector3();
             cd.currentPosition = cd.startPosition;
         }
 
         public override void FrameFeed()
         {
-            cd.gameObject.transform.position = new Vector3(cd.currentPosition.x, cd.currentPosition.y, cd.currentPosition.z);
+            cd.gameObject.transform.position = cd.currentPosition.toVector3();
         }
 
         public override void Destroy()
