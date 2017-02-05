@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using URFLeague.Game.Factory;
-using URFLeague.Game.Entity.Component;
-using URFLeague.Game.Entity.Skill;
+using URFLeague.Util.Data;
+using URFLeague.Game.Entity.Attachable;
 
 namespace URFLeague.Game.Entity
 {
@@ -10,11 +9,11 @@ namespace URFLeague.Game.Entity
     {   
         public ChampionData championStats;
 
-        public string[] componentsId;
+        public string[] componentsType;
         public string[] skillsId;
 
-        private List<EntityComponent> components = new List<EntityComponent>();
-        private List<EntitySkill> skills = new List<EntitySkill>();
+        private List<IAttachableEntity> components = new List<IAttachableEntity>();
+        private List<IAttachableEntity> skills = new List<IAttachableEntity>();
 
         #region IEntity implementation
 
@@ -25,8 +24,8 @@ namespace URFLeague.Game.Entity
 
         public void Boot()
         {
-            foreach(var id in componentsId)
-                components.Add(EntityComponentFactory.RequestComponent(id, this));
+            foreach(var componentName in componentsType)
+                components.Add(DataProvider.RequestObjectInstance<IAttachableEntity>(componentName).AttachTo(this));
 
             foreach(var cmp in components)
                 cmp.Boot();
