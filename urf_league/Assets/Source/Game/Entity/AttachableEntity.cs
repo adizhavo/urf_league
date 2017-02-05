@@ -4,7 +4,7 @@ namespace URFLeague.Game.Entity.Attachable
 {
     public interface IAttachableEntity : IEntity
     {
-        IAttachableEntity AttachTo(IEntity parent);
+        IAttachableEntity AttachTo(IComplexEntity parent);
     }
 
     public abstract class Attachable<CustomData, ParentData> : IAttachableEntity where CustomData : AttachableEntityData
@@ -12,7 +12,7 @@ namespace URFLeague.Game.Entity.Attachable
     {
         private CustomData cd;
 
-        public virtual IAttachableEntity AttachTo(IEntity parent)
+        public virtual IAttachableEntity AttachTo(IComplexEntity parent)
         {
             if (parent == null) 
                 throw new ArgumentNullException("Parent entity", "Parent cannot be null");

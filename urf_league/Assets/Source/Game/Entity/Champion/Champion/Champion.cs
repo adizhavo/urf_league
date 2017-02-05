@@ -4,13 +4,14 @@ using URFLeague.Game.Entity.Attachable;
 
 namespace URFLeague.Game.Entity
 {
-    public class Champion : IEntity
+    public class Champion : IComplexEntity
     {   
         public ChampionData championStats;
         public ClassDataMap[] componentDataMap;
-        private List<IAttachableEntity> activeComponents = new List<IAttachableEntity>();
+        private List<IAttachableEntity> enabledComponents = new List<IAttachableEntity>();
+        private List<IAttachableEntity> disabledComponents = new List<IAttachableEntity>();
 
-        #region IEntity implementation
+        #region IComplexEntity implementation
 
         public IEntityData data 
         {
@@ -20,31 +21,96 @@ namespace URFLeague.Game.Entity
         public void Boot(IEntityData initData = null)
         {
             foreach(var map in componentDataMap)
-            {
-                IAttachableEntity aEnt = DataProvider.RequestAttachableEntityFromDataMap<IAttachableEntity>(map);
-                aEnt.AttachTo(this);
-                activeComponents.Add(aEnt);
-            }
+                AddComponent(map);
         }
 
         public void Awake()
         {
-            foreach(var cmp in activeComponents)
-                cmp.Awake();
+            for(i = 0; i < enabledComponents.Count; i ++)
+                enabledComponents[i].Awake();
         }
 
         public void FrameFeed()
         {
-            foreach(var cmp in activeComponents)
-                cmp.FrameFeed();
+            for(i = 0; i < enabledComponents.Count; i ++)
+                enabledComponents[i].FrameFeed();
         }
 
         public void Destroy()
         {
-            foreach(var cmp in activeComponents)
-                cmp.Destroy();
+            for(i = 0; i < enabledComponents.Count; i ++)
+                enabledComponents[i].Destroy();
+        }
+
+        public void AddComponent(ClassDataMap map, bool awake = false)
+        {
+            IAttachableEntity aEnt = DataProvider.RequestAttachableEntityFromDataMap<IAttachableEntity>(map);
+            aEnt.AttachTo(this);
+            enabledComponents.Add(aEnt);
+            if (awake) aEnt.Awake();
+        }
+
+        public void EnableComponent<T>() where T : IAttachableEntity
+        {
+            foreach(IAttachableEntity disabled in disabledComponents)
+                if (disabled is T)
+                {
+                    enabledComponents.Add(disabled);
+                    disabledComponents.Remove(disabled);
+                    return;
+                }
+
+            UnityEngine.Debug.Log("The selected type was not found was not found");
+        }
+
+        public void EnableAllComponents()
+        {
+            foreach(IAttachableEntity disabled in disabledComponents)
+                enabledComponents.Add(disabled);
+
+            disabledComponents.Clear();
+        }
+
+        public void DisableComponent<T>() where T : IAttachableEntity
+        {
+            foreach(IAttachableEntity enabled in enabledComponents)
+                if (enabled is T)
+                {
+                    disabledComponents.Add(enabled);
+                    enabledComponents.Remove(enabled);
+                    return;
+                }
+
+            UnityEngine.Debug.Log("The selected type was not found was not found");
+        }
+
+        public void DisableAllComponents()
+        {
+            foreach(IAttachableEntity enabled in enabledComponents)
+                disabledComponents.Add(enabled);
+
+            enabledComponents.Clear();
+        }
+
+        public void DisableAllComponentsExcept<T>() where T : IAttachableEntity
+        {
+            IAttachableEntity exception = null;
+
+            foreach(IAttachableEntity enabled in enabledComponents)
+            {
+                if (enabled is T) 
+                    exception = enabled;
+                else
+                    disabledComponents.Add(enabled);
+            }
+
+            enabledComponents.Clear();
+            if (exception != null) enabledComponents.Add(exception);
+            else UnityEngine.Debug.Log("The exception component was not found");
         }
 
         #endregion
+
+        private int i = 0;
     }
 }
