@@ -6,23 +6,28 @@ namespace URFLeague.Game.Entity.Skill
     {
         string id {set; get;}
         string[] disableComponentId {set; get;}
+        IEntityData parentData {set; get;}
     }
 
     public abstract class EntitySkill : IEntity 
     {
-        protected IEntity parent;
+        protected ISkillData skillData;
 
-        public EntitySkill(IEntity parent)
+        public EntitySkill AttachTo(IEntity parent)
         {
             if (parent == null) 
                 throw new ArgumentNullException("Parent entity", "Parent cannot be null");
 
-            this.parent = parent;
+            skillData.parentData = parent.data;
+            return this;
         }
 
         #region IEntity implementation
 
-        public IEntityData data {get;}
+        public IEntityData data
+        {
+            get { return skillData; }
+        }
 
         public abstract void Boot();
 
