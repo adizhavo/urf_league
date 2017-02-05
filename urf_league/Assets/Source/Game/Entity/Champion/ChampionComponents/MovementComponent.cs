@@ -4,11 +4,11 @@ using URFLeague.Config;
 
 namespace URFLeague.Game.Entity.Component
 {
-    public class MoveComponent : EntityComponent
+    public class MovementComponent : EntityComponent
     {
         private ChampionData cd;
 
-        public MoveComponent(IEntity parent) : base(parent) { }
+        public MovementComponent(IEntity parent) : base(parent) { }
 
         #region implemented abstract members of EntityComponent
         public override void Boot()
@@ -27,7 +27,7 @@ namespace URFLeague.Game.Entity.Component
         public override void FrameFeed()
         {
             WorldCoordinate lookDirection = cd.targetPosition - cd.currentPosition;
-            if (lookDirection.toVector3().sqrMagnitude > Mathf.Epsilon)
+            if (lookDirection.toVector3().sqrMagnitude > GameConfig.MIN_TARGET_POS_DISTANCE)
             {
                 cd.orientation = lookDirection.Normalized();
                 cd.currentPosition += cd.orientation * cd.movementSpeed * Time.deltaTime;
