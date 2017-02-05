@@ -4,9 +4,9 @@ using URFLeague.Game.Entity.Attachable;
 
 namespace URFLeague.Game.Entity
 {
-    public class Champion : IComplexEntity
+    public abstract class WorldObject<CustomData> : IComplexEntity where CustomData : IEntityData
     {   
-        public ChampionData championStats;
+        public CustomData championStats;
         public ClassDataMap[] componentDataMap;
         private List<IAttachableEntity> enabledComponents = new List<IAttachableEntity>();
         private List<IAttachableEntity> disabledComponents = new List<IAttachableEntity>();
