@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using URFLeague.Game.Factory;
 using URFLeague.Game.Entity.Component;
+using URFLeague.Game.Entity.Skill;
 
 namespace URFLeague.Game.Entity
 {
@@ -10,8 +11,10 @@ namespace URFLeague.Game.Entity
         public ChampionData championStats;
 
         public string[] componentsId;
+        public string[] skillsId;
 
         private List<EntityComponent> components = new List<EntityComponent>();
+        private List<EntitySkill> skills = new List<EntitySkill>();
 
         #region IEntity implementation
 
