@@ -31,10 +31,20 @@ namespace URFLeague.Game.Entity.Component
             {
                 cd.orientation = lookDirection.Normalized();
                 cd.currentPosition += cd.orientation * cd.movementSpeed * Time.deltaTime;
+
+                #if UNITY_EDITOR
+                LogVectors();
+                #endif
             }
         }
 
         public override void Destroy() { }
         #endregion
+
+        private void LogVectors()
+        {
+            Debug.DrawLine(cd.currentPosition.toVector3(), cd.targetPosition.toVector3(), Color.red);
+            Debug.DrawLine(cd.currentPosition.toVector3(), (cd.currentPosition + cd.orientation).toVector3(), Color.blue);
+        }
     }
 }
