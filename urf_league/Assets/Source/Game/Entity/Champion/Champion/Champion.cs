@@ -7,12 +7,8 @@ namespace URFLeague.Game.Entity
     public class Champion : IEntity
     {   
         public ChampionData championStats;
-
-        public string[] componentsClassName;
-        public ClassDataMap[] skillDataMap;
-
-        private List<IAttachableEntity> components = new List<IAttachableEntity>();
-        private List<IAttachableEntity> skills = new List<IAttachableEntity>();
+        public ClassDataMap[] componentDataMap;
+        private List<IAttachableEntity> activeComponents = new List<IAttachableEntity>();
 
         #region IEntity implementation
 
@@ -23,48 +19,38 @@ namespace URFLeague.Game.Entity
 
         public void Boot(IEntityData initData = null)
         {
-            foreach(var cn in componentsClassName)
+            foreach(var cn in componentDataMap)
             {
-                IAttachableEntity cmp = DataProvider.RequestObjectInstance<IAttachableEntity>(cn).AttachTo(this);
-                cmp.Boot();
-                components.Add(cmp);
-            }
+                IAttachableEntity component = DataProvider.RequestObjectInstance<IAttachableEntity>(cn.className).AttachTo(this);
+                IEntityData customData = null;
+                if (!string.IsNullOrEmpty(cn.jsonDataPath))
+                {
+                    customData = DataProvider.RequestObjectFromJson<IEntityData>(cn.dataClassName, cn.jsonDataPath);
+                }
 
-            foreach(var sdm in skillDataMap)
-            {
-                IAttachableEntity skill = DataProvider.RequestObjectInstance<IAttachableEntity>(sdm.className).AttachTo(this);
-                IEntityData skillData = DataProvider.RequestObjectFromJson<IEntityData>(sdm.dataClassName, sdm.jsonDataPath);
-                skill.Boot(skillData);
-                skills.Add(skill);
+                component.Boot(customData);
+                activeComponents.Add(component);
             }
         }
 
         public void Awake()
         {
-            foreach(var cmp in components)
+            foreach(var cmp in activeComponents)
                 cmp.Awake();
-
-            foreach(var s in skills)
-                s.Awake();
         }
 
         public void FrameFeed()
         {
-            foreach(var cmp in components)
+            foreach(var cmp in activeComponents)
                 cmp.FrameFeed();
-
-            foreach(var s in skills)
-                s.FrameFeed();
         }
 
         public void Destroy()
         {
-            foreach(var cmp in components)
+            foreach(var cmp in activeComponents)
                 cmp.Destroy();
-
-            foreach(var s in skills)
-                s.Destroy();
         }
+
         #endregion
     }
 
