@@ -5,7 +5,7 @@ namespace URFLeague.Game.Entity
 {
     public interface IComplexEntity : IEntity
     {
-        void AddComponent(ClassDataMap map);
+        void AddComponent(ClassDataMap map, bool awake = false);
         void EnableComponent<T>() where T : IAttachableEntity;
         void EnableAllComponents();
         void DisableComponent<T>() where T : IAttachableEntity; 
