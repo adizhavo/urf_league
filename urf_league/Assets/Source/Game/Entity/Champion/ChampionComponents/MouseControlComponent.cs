@@ -5,18 +5,9 @@ using URFLeague.Game.Entity.Attachable;
 
 namespace URFLeague.Game.Entity.Attachable.Component
 {
-    public class MouseControlComponent : Attachable<AttachableEntityData>
+    public class MouseControlComponent : Attachable<AttachableEntityData, ChampionData>
     {
-        private ChampionData cd;
-
         #region implemented abstract members of Attachable
-        public override void Boot()
-        {
-            cd = ((ChampionData)adata.parentData);
-
-            if (cd == null)
-                throw new InvalidCastException("IEntity data is not a champion data");
-        }
 
         public override void Awake() { }
 
@@ -31,18 +22,19 @@ namespace URFLeague.Game.Entity.Attachable.Component
                 {
                     if (hit.transform.CompareTag(GameConfig.TERRAIN_TAG))
                     {
-                        cd.targetPosition = new WorldCoordinate
-                                                {
-                                                    x = hit.point.x, 
-                                                    y = hit.point.y, 
-                                                    z = hit.point.z
-                                                };
+                        parentData.targetPosition = new WorldCoordinate
+                                                        {
+                                                           x = hit.point.x, 
+                                                           y = hit.point.y, 
+                                                           z = hit.point.z
+                                                        };
                     }
                 }
             }
         }
 
         public override void Destroy() { }
+
         #endregion
     }
 }

@@ -11,6 +11,12 @@ namespace URFLeague.Util.Data
             return JsonUtility.FromJson<T>(Resources.Load<TextAsset>(jsonPath).text);
         }
 
+        public static T RequestObjectFromJson<T>(string className, string jsonPath)
+        {
+            Type type = Type.GetType(className);
+            return (T)JsonUtility.FromJson(Resources.Load<TextAsset>(jsonPath).text, type);
+        }
+
         public static T RequestObjectInstance<T>(string className) where T : class
         {
             Type type = Type.GetType(className);

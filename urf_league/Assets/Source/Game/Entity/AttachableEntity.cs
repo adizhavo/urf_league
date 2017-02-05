@@ -7,29 +7,56 @@ namespace URFLeague.Game.Entity.Attachable
         IAttachableEntity AttachTo(IEntity parent);
     }
 
-    public abstract class Attachable<Data> : IAttachableEntity where Data : AttachableEntityData
+    public abstract class Attachable<CustomData, ParentData> : IAttachableEntity where CustomData : AttachableEntityData
+                                                                                 where ParentData : IEntityData
     {
-        public Data adata;
+        private CustomData cd;
 
         public IAttachableEntity AttachTo(IEntity parent)
         {
             if (parent == null) 
                 throw new ArgumentNullException("Parent entity", "Parent cannot be null");
 
-            if (adata == null) adata = Activator.CreateInstance<Data>();
+            if (cd == null) cd = Activator.CreateInstance<CustomData>();
 
-            adata.parentData = parent.data;
+            if (parent.data is ParentData) cd.parentData = parent.data;
+            else throw new InvalidCastException("The parent to attach is doesnt have a " + parentData.GetType() + " data type, its not compatible");
+
             return this;
+        }
+
+        public CustomData customData
+        {
+            get { return cd; }
+        }
+
+        public ParentData parentData
+        {
+            get { return (ParentData)customData.parentData;  }
         }
 
         #region IEntity implementation
 
         public IEntityData data
         {
-            get { return data; }
+            get { return customData; }
         }
 
-        public abstract void Boot();
+        public virtual void Boot(IEntityData initData = null)
+        {
+            if (initData != null && initData is CustomData)
+            {
+                if (cd != null && cd.parentData != null)
+                {
+                    IEntityData pData = customData.parentData;
+                    cd = (CustomData)initData;
+                    cd.parentData = pData;
+                }
+                else cd = (CustomData)initData;
+            }
+
+            if (cd == null) cd = Activator.CreateInstance<CustomData>();
+        }
 
         public abstract void Awake();
 
