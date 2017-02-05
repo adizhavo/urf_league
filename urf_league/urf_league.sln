@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{A56960FB-5A01-5EF6-9A22-578E78AAE8B4}") = "urf_league", "Assembly-CSharp.csproj", "{F04B5B19-5349-A605-8DFA-2EE6DE817117}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F04B5B19-5349-A605-8DFA-2EE6DE817117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F04B5B19-5349-A605-8DFA-2EE6DE817117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F04B5B19-5349-A605-8DFA-2EE6DE817117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F04B5B19-5349-A605-8DFA-2EE6DE817117}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
