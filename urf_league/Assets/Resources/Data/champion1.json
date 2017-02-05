@@ -7,10 +7,10 @@
 		},
 		"movementSpeed" : 1
 	},
-	"componentsId" : [
-		"Position",
-		"Movement",
-		"RenderOrientation",
-		"MouseControl"
+	"componentsType" : [
+		"URFLeague.Game.Entity.Attachable.Component.PositionComponent",
+		"URFLeague.Game.Entity.Attachable.Component.MovementComponent",
+		"URFLeague.Game.Entity.Attachable.Component.RenderOrientationComponent",
+		"URFLeague.Game.Entity.Attachable.Component.MouseControlComponent"
 	]
 }
