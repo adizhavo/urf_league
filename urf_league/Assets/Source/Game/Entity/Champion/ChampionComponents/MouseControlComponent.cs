@@ -35,7 +35,7 @@ namespace URFLeague.Game.Entity.Component
                 {
                     if (hit.transform.CompareTag(GameConfig.TERRAIN_TAG))
                     {
-                        cd.targetPosition = new WorldCoordinates
+                        cd.targetPosition = new WorldCoordinate
                                                 {
                                                     x = hit.point.x, 
                                                     y = hit.point.y, 

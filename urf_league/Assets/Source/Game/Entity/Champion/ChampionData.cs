@@ -8,20 +8,21 @@ namespace URFLeague.Game.Entity
     {
         public string modelPath;
         public GameObject gameObject;
-        public WorldCoordinates startPosition;
-        public WorldCoordinates currentPosition;
-        public WorldCoordinates targetPosition;
+        public WorldCoordinate startPosition;
+        public WorldCoordinate currentPosition;
+        public WorldCoordinate targetPosition;
+        public WorldCoordinate orientation;
         public float movementSpeed;
     }
 
     [Serializable]
-    public struct WorldCoordinates
+    public struct WorldCoordinate
     {
         public float x, y, z;
 
-        public static WorldCoordinates operator + (WorldCoordinates c1, WorldCoordinates c2)
+        public static WorldCoordinate operator + (WorldCoordinate c1, WorldCoordinate c2)
         {
-            return new WorldCoordinates
+            return new WorldCoordinate
             {
                 x = c1.x + c2.x,
                 y = c1.y + c2.y,
@@ -29,9 +30,9 @@ namespace URFLeague.Game.Entity
             };
         }
 
-        public static WorldCoordinates operator - (WorldCoordinates c1, WorldCoordinates c2)
+        public static WorldCoordinate operator - (WorldCoordinate c1, WorldCoordinate c2)
         {
-            return new WorldCoordinates
+            return new WorldCoordinate
             {
                 x = c1.x - c2.x,
                 y = c1.y - c2.y,
