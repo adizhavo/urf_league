@@ -40,9 +40,30 @@ namespace URFLeague.Game.Entity
             };
         }
 
+        public static WorldCoordinate operator * (WorldCoordinate c, float m)
+        {
+            return new WorldCoordinate
+            {
+                x = c.x * m,
+                y = c.y * m,
+                z = c.z * m
+            };
+        }
+
         public Vector3 toVector3()
         {
             return new Vector3(x, y, z);
+        }
+
+        public WorldCoordinate Normalized()
+        {
+            Vector3 v = toVector3().normalized;
+            return new WorldCoordinate
+            {
+                x = v.x, 
+                y = v.y, 
+                z = v.z
+            };
         }
     }
 }
