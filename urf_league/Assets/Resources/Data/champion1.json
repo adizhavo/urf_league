@@ -4,10 +4,12 @@
 		"modelPath" : "Models/Champion1",
 		"startPosition" : { 
 			"x" : 0.0, "y" : 0.0, "z" : 0.0
-		}
+		},
+		"movementSpeed" : 1
 	},
 	"componentsId" : [
 		"ChampPosition",
-		"MouseControl"
+		"MouseControl",
+		"Movement"
 	]
 }
