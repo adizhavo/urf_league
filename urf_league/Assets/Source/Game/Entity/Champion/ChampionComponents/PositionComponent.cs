@@ -20,14 +20,13 @@ namespace URFLeague.Game.Entity.Component
 
             if (cd == null)
                 throw new InvalidCastException("IEntity data is not a champion data");
-
-            cd.gameObject.transform.position = new Vector3(cd.startPosition.x, cd.startPosition.y, cd.startPosition.z);
-            cd.currentPosition = cd.startPosition;
         }
 
         public override void Awake()
         {
             cd.gameObject = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>(cd.modelPath));
+            cd.gameObject.transform.position = new Vector3(cd.startPosition.x, cd.startPosition.y, cd.startPosition.z);
+            cd.currentPosition = cd.startPosition;
         }
 
         public override void FrameFeed()
