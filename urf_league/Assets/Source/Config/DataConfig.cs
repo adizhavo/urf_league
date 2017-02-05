@@ -10,5 +10,6 @@
         // Components ids
         public const string CHAMP_REND_COMP = "ChampPosition";
         public const string MOUSE_CONTR_COMP = "MouseControl";
+        public const string MOVEMENT_COMP = "Movement";
     }
 }

@@ -15,6 +15,9 @@ namespace URFLeague.Game.Factory
 
                 case DataConfig.MOUSE_CONTR_COMP : 
                     return new MouseControlComponent(attachedTo);
+
+                case DataConfig.MOVEMENT_COMP : 
+                    return new MovementComponent(attachedTo);
                 
                 default :
                     UnityEngine.Debug.LogError(componentId + " component requested is not registered in the factory, will return null.");
