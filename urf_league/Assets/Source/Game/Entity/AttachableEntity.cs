@@ -1,24 +1,24 @@
 ﻿using System;
 
-namespace URFLeague.Game.Entity.Skill
+namespace URFLeague.Game.Entity.Attachable
 {
-    public interface ISkillData : IEntityData
+    public interface IAttachableEntity : IEntity
     {
-        string id {set; get;}
-        string[] disableComponentId {set; get;}
-        IEntityData parentData {set; get;}
+        IAttachableEntity AttachTo(IEntity parent);
     }
 
-    public abstract class EntitySkill : IEntity 
+    public abstract class Attachable<Data> : IAttachableEntity where Data : AttachableEntityData
     {
-        protected ISkillData skillData;
+        public Data adata;
 
-        public EntitySkill AttachTo(IEntity parent)
+        public IAttachableEntity AttachTo(IEntity parent)
         {
             if (parent == null) 
                 throw new ArgumentNullException("Parent entity", "Parent cannot be null");
 
-            skillData.parentData = parent.data;
+            if (adata == null) adata = Activator.CreateInstance<Data>();
+
+            adata.parentData = parent.data;
             return this;
         }
 
@@ -26,7 +26,7 @@ namespace URFLeague.Game.Entity.Skill
 
         public IEntityData data
         {
-            get { return skillData; }
+            get { return data; }
         }
 
         public abstract void Boot();
