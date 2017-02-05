@@ -8,8 +8,9 @@
 		"movementSpeed" : 1
 	},
 	"componentsId" : [
-		"ChampPosition",
+		"Position",
 		"MouseControl",
-		"Movement"
+		"Movement",
+		"RenderOrientation"
 	]
 }
