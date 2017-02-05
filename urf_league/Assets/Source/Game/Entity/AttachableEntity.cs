@@ -12,7 +12,7 @@ namespace URFLeague.Game.Entity.Attachable
     {
         private CustomData cd;
 
-        public IAttachableEntity AttachTo(IEntity parent)
+        public virtual IAttachableEntity AttachTo(IEntity parent)
         {
             if (parent == null) 
                 throw new ArgumentNullException("Parent entity", "Parent cannot be null");
@@ -20,7 +20,7 @@ namespace URFLeague.Game.Entity.Attachable
             if (cd == null) cd = Activator.CreateInstance<CustomData>();
 
             if (parent.data is ParentData) cd.parentData = parent.data;
-            else throw new InvalidCastException("The parent to attach is doesnt have a " + parentData.GetType() + " data type, its not compatible");
+            else throw new InvalidCastException("The parent is not compatible with this attachable entity of type: " + this.GetType() + ", check if the class definition matches the parent data structure");
 
             return this;
         }

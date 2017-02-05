@@ -19,17 +19,11 @@ namespace URFLeague.Game.Entity
 
         public void Boot(IEntityData initData = null)
         {
-            foreach(var cn in componentDataMap)
+            foreach(var map in componentDataMap)
             {
-                IAttachableEntity component = DataProvider.RequestObjectInstance<IAttachableEntity>(cn.className).AttachTo(this);
-                IEntityData customData = null;
-                if (!string.IsNullOrEmpty(cn.jsonDataPath))
-                {
-                    customData = DataProvider.RequestObjectFromJson<IEntityData>(cn.dataClassName, cn.jsonDataPath);
-                }
-
-                component.Boot(customData);
-                activeComponents.Add(component);
+                IAttachableEntity aEnt = DataProvider.RequestAttachableEntityFromDataMap<IAttachableEntity>(map);
+                aEnt.AttachTo(this);
+                activeComponents.Add(aEnt);
             }
         }
 
@@ -52,13 +46,5 @@ namespace URFLeague.Game.Entity
         }
 
         #endregion
-    }
-
-    [System.Serializable]
-    public struct ClassDataMap
-    {
-        public string className;
-        public string dataClassName;
-        public string jsonDataPath;
     }
 }
