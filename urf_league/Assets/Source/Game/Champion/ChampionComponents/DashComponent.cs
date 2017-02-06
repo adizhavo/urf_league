@@ -13,17 +13,13 @@ namespace URFLeague.Game.Entity.Attachable.Skill
         public float recoveryTime;
     }
 
-    public class Dash : Attachable<DashData, ChampionData> 
+    public class DashComponent : Attachable<DashData, ChampionData> 
     {
         private IComplexEntity complexEntity;
 
         #region implemented abstract members of Attachable
 
-        public override IAttachableEntity AttachTo(IComplexEntity parent)
-        {
-            complexEntity = parent;
-            return base.AttachTo(parent);
-        }
+        public override void Boot() { }
 
         public override void Awake() { }
 
@@ -31,7 +27,7 @@ namespace URFLeague.Game.Entity.Attachable.Skill
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                complexEntity.DisableAllComponentsExcept<Dash>();
+                complexEntity.DisableAllComponentsExcept<DashComponent>();
             }
             else if (Input.GetKeyUp(KeyCode.Space))
             {
