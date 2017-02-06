@@ -8,17 +8,11 @@ namespace URFLeague.Util.Data
 {
     public static class DataProvider
     {
-        public static T RequestAttachableEntityFromDataMap<T>(ClassDataMap map) where T : IAttachableEntity
+        public static IAttachableEntity RequestAttachableEntityFromDataMap(ClassDataMap map)
         {
-            IAttachableEntity attachable = DataProvider.RequestObjectInstance<IAttachableEntity>(map.className);
-            IEntityData customData = null;
-            if (!string.IsNullOrEmpty(map.jsonDataPath))
-            {
-                customData = DataProvider.RequestObjectFromJson<IEntityData>(map.dataClassName, map.jsonDataPath);
-            }
-
-            attachable.Boot(customData);
-            return (T)attachable;
+            return string.IsNullOrEmpty(map.jsonDataPath) ?
+                DataProvider.RequestObjectInstance<IAttachableEntity>(map.className) :
+                DataProvider.RequestObjectFromJson<IAttachableEntity>(map.className, map.jsonDataPath);
         }
 
         public static T RequestObjectFromJson<T>(string jsonPath)

@@ -3,7 +3,7 @@
     public interface IEntity
     {
         IEntityData data {get;}
-        void Boot(IEntityData initData = null);
+        void Boot();
         void Awake();
         void FrameFeed();
         void Destroy();

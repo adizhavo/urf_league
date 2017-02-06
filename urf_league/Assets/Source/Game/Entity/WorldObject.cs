@@ -6,7 +6,7 @@ namespace URFLeague.Game.Entity
 {
     public abstract class WorldObject<CustomData> : IComplexEntity where CustomData : IEntityData
     {   
-        public CustomData championStats;
+        public CustomData objectStats;
         public ClassDataMap[] componentDataMap;
         private List<IAttachableEntity> enabledComponents = new List<IAttachableEntity>();
         private List<IAttachableEntity> disabledComponents = new List<IAttachableEntity>();
@@ -15,10 +15,10 @@ namespace URFLeague.Game.Entity
 
         public IEntityData data 
         {
-            get { return championStats; }
+            get { return objectStats; }
         }
 
-        public void Boot(IEntityData initData = null)
+        public void Boot()
         {
             foreach(var map in componentDataMap)
                 AddComponent(map);
@@ -44,10 +44,11 @@ namespace URFLeague.Game.Entity
 
         public void AddComponent(ClassDataMap map, bool awake = false)
         {
-            IAttachableEntity aEnt = DataProvider.RequestAttachableEntityFromDataMap<IAttachableEntity>(map);
+            IAttachableEntity aEnt = DataProvider.RequestAttachableEntityFromDataMap(map);
+            aEnt.Boot();
             aEnt.AttachTo(this);
-            enabledComponents.Add(aEnt);
             if (awake) aEnt.Awake();
+            enabledComponents.Add(aEnt);
         }
 
         public void EnableComponent<T>() where T : IAttachableEntity

@@ -10,24 +10,24 @@ namespace URFLeague.Game.Entity.Attachable
     public abstract class Attachable<CustomData, ParentData> : IAttachableEntity where CustomData : AttachableEntityData
                                                                                  where ParentData : IEntityData
     {
-        private CustomData cd;
+        public CustomData customData;
+        protected IComplexEntity parent;
 
         public virtual IAttachableEntity AttachTo(IComplexEntity parent)
         {
             if (parent == null) 
                 throw new ArgumentNullException("Parent entity", "Parent cannot be null");
+            else
+                this.parent = parent;
 
-            if (cd == null) cd = Activator.CreateInstance<CustomData>();
+            if (customData == null) customData = Activator.CreateInstance<CustomData>();
 
-            if (parent.data is ParentData) cd.parentData = parent.data;
-            else throw new InvalidCastException("The parent is not compatible with this attachable entity of type: " + this.GetType() + ", check if the class definition matches the parent data structure");
+            if (parent.data is ParentData) customData.parentData = parent.data;
+            else throw new InvalidCastException("The parent is not compatible with this attachable entity of type: " + this.GetType() 
+                                                + ", check if the class definition matches the parent data structure. The defined parent data type is" 
+                                                + typeof(ParentData));
 
             return this;
-        }
-
-        public CustomData customData
-        {
-            get { return cd; }
         }
 
         public ParentData parentData
@@ -42,21 +42,7 @@ namespace URFLeague.Game.Entity.Attachable
             get { return customData; }
         }
 
-        public virtual void Boot(IEntityData initData = null)
-        {
-            if (initData != null && initData is CustomData)
-            {
-                if (cd != null && cd.parentData != null)
-                {
-                    IEntityData pData = customData.parentData;
-                    cd = (CustomData)initData;
-                    cd.parentData = pData;
-                }
-                else cd = (CustomData)initData;
-            }
-
-            if (cd == null) cd = Activator.CreateInstance<CustomData>();
-        }
+        public abstract void Boot();
 
         public abstract void Awake();
 

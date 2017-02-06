@@ -8,6 +8,8 @@ namespace URFLeague.Game.Entity.Attachable.Component
     {
         #region implemented abstract members of Attachable
 
+        public override void Boot() { }
+
         public override void Awake() { }
 
         public override void FrameFeed()
