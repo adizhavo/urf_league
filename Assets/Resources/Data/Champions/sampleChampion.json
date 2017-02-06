@@ -1,7 +1,7 @@
 {
 	"objectStats" : 
 	{
-		"modelPath" : "Models/Champion1",
+		"modelPath" : "Models/Champions/sampleChampion",
 		"startPosition" : { 
 			"x" : 0.0, "y" : 0.0, "z" : 0.0
 		},
