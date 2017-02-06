@@ -1,9 +1,9 @@
 {
 	"customData" : 
 	{
-		"distance" : 5,
-		"speed" : 1, 
-		"preparationTime" : 1, 
-		"recoveryTime" : 2
+		"distance" : 2,
+		"speed" : 30, 
+		"preparationTime" : 0.1, 
+		"recoveryTime" : 0.1
 	}
 }
