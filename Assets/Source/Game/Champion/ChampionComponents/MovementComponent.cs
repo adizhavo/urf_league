@@ -19,7 +19,14 @@ namespace URFLeague.Game.Entity.Attachable.Component
             if (lookDirection.toVector3().sqrMagnitude > GameConfig.MIN_TARGET_POS_DISTANCE)
             {
                 parentData.orientation = lookDirection.Normalized();
-                parentData.currentPosition += parentData.orientation * parentData.movementSpeed * Time.deltaTime;
+                Vector3 offsetVector = parentData.orientation.toVector3() * parentData.movementSpeed * Time.deltaTime;
+                offsetVector = Vector3.ClampMagnitude(offsetVector, lookDirection.toVector3().magnitude);
+                parentData.currentPosition += new WorldCoordinate
+                                              {
+                                                  x = offsetVector.x,
+                                                  y = offsetVector.y, 
+                                                  z = offsetVector.z
+                                              };
 
                 #if UNITY_EDITOR
                 LogVectors();

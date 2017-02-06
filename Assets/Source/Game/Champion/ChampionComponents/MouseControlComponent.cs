@@ -15,7 +15,7 @@ namespace URFLeague.Game.Entity.Attachable.Component
 
         public override void FrameFeed()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit = new RaycastHit();
@@ -25,11 +25,11 @@ namespace URFLeague.Game.Entity.Attachable.Component
                     if (hit.transform.CompareTag(GameConfig.TERRAIN_TAG))
                     {
                         parentData.targetPosition = new WorldCoordinate
-                                                        {
-                                                           x = hit.point.x, 
-                                                           y = hit.point.y, 
-                                                           z = hit.point.z
-                                                        };
+                                                    {
+                                                        x = hit.point.x, 
+                                                        y = hit.point.y, 
+                                                        z = hit.point.z
+                                                    };
                     }
                 }
             }
