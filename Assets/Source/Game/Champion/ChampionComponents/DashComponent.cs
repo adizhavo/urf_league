@@ -37,7 +37,7 @@ namespace URFLeague.Game.Entity.Attachable.Skill
 
         public override void FrameFeed()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !customData.isDashing)
+            if (Input.GetKeyDown(KeyCode.E) && !customData.isDashing)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit = new RaycastHit();

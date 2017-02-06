@@ -15,7 +15,7 @@ namespace URFLeague.Game.Entity.Attachable.Component
 
         public override void FrameFeed()
         {
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButton(1))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit = new RaycastHit();
