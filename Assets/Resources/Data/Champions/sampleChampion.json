@@ -27,6 +27,10 @@
 		{
 			"className" : "URFLeague.Game.Entity.Attachable.Skill.DashComponent", 
 			"jsonDataPath" : "Data/Skills/normalDash"
+		},
+		{
+			"className" : "URFLeague.Game.Entity.Attachable.Skill.CutComponent", 
+			"jsonDataPath" : "Data/Skills/normalCut"
 		}
 	]
 }
