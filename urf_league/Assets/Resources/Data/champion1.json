@@ -1,5 +1,5 @@
 {
-	"championStats" : 
+	"objectStats" : 
 	{
 		"modelPath" : "Models/Champion1",
 		"startPosition" : { 
@@ -10,27 +10,22 @@
 	"componentDataMap" : [
 		{
 			"className" : "URFLeague.Game.Entity.Attachable.Component.PositionComponent",
-			"dataClassName" : "",
 			"jsonDataPath" : ""
 		},
 		{
 			"className" : "URFLeague.Game.Entity.Attachable.Component.MovementComponent",
-			"dataClassName" : "",
 			"jsonDataPath" : ""
 		},
 		{
 			"className" : "URFLeague.Game.Entity.Attachable.Component.RenderOrientationComponent",
-			"dataClassName" : "",
 			"jsonDataPath" : ""
 		},
 		{
 			"className" : "URFLeague.Game.Entity.Attachable.Component.MouseControlComponent",
-			"dataClassName" : "",
 			"jsonDataPath" : ""
 		},
 		{
-			"className" : "URFLeague.Game.Entity.Attachable.Skill.Dash", 
-			"dataClassName" : "URFLeague.Game.Entity.Attachable.Skill.DashData",
+			"className" : "URFLeague.Game.Entity.Attachable.Skill.DashComponent", 
 			"jsonDataPath" : "Data/Skills/normalDash"
 		}
 	]
