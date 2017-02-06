@@ -11,14 +11,14 @@ namespace URFLeague.Game.Entity.Attachable
                                                                                  where ParentData : IEntityData
     {
         public CustomData customData;
-        protected IComplexEntity parent;
+        protected IComplexEntity parentComplexEntity;
 
         public virtual IAttachableEntity AttachTo(IComplexEntity parent)
         {
             if (parent == null) 
                 throw new ArgumentNullException("Parent entity", "Parent cannot be null");
             else
-                this.parent = parent;
+                this.parentComplexEntity = parent;
 
             if (customData == null) customData = Activator.CreateInstance<CustomData>();
 

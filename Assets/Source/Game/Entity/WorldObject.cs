@@ -51,6 +51,20 @@ namespace URFLeague.Game.Entity
             enabledComponents.Add(aEnt);
         }
 
+        public T GetComponent<T>() where T : IAttachableEntity
+        {
+            foreach(IAttachableEntity enabled in enabledComponents)
+                if (enabled is T)
+                    return (T)enabled;
+
+            foreach(IAttachableEntity disabled in disabledComponents)
+                if (disabled is T)
+                    return (T)disabled;
+
+            UnityEngine.Debug.Log("The selected " + typeof(T) + " was not found");
+            return default(T);
+        }
+
         public void EnableComponent<T>() where T : IAttachableEntity
         {
             foreach(IAttachableEntity disabled in disabledComponents)
@@ -61,7 +75,7 @@ namespace URFLeague.Game.Entity
                     return;
                 }
 
-            UnityEngine.Debug.Log("The selected type was not found was not found");
+            UnityEngine.Debug.Log("The selected " + typeof(T) + " was not found");
         }
 
         public void EnableAllComponents()
@@ -82,7 +96,7 @@ namespace URFLeague.Game.Entity
                     return;
                 }
 
-            UnityEngine.Debug.Log("The selected type was not found was not found");
+            UnityEngine.Debug.Log("The selected " + typeof(T) + " was not found");
         }
 
         public void DisableAllComponents()
@@ -107,7 +121,7 @@ namespace URFLeague.Game.Entity
 
             enabledComponents.Clear();
             if (exception != null) enabledComponents.Add(exception);
-            else UnityEngine.Debug.Log("The exception component was not found");
+            else UnityEngine.Debug.Log("The exception " + typeof(T) + " was not found");
         }
 
         #endregion

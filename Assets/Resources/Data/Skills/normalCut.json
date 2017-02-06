@@ -1,0 +1,14 @@
+{
+	"customData" : 
+	{
+		"FXname" : "Cut",
+		"FXlocalPosition" : {
+			"x" : 0, "y" : 0.7, "z" : 1.5
+		},
+		"FXrotationOffset" : {
+			"x" : 0,  "y" : 90, "z" : 0
+		},
+		"disableTime" : 0.2,
+		"speedScale" : 1.3
+	}
+}

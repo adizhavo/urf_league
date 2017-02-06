@@ -1,11 +1,11 @@
 {
 	"objectStats" : 
 	{
-		"modelPath" : "Models/Champion1",
+		"modelPath" : "Models/Champions/sampleChampion",
 		"startPosition" : { 
 			"x" : 0.0, "y" : 0.0, "z" : 0.0
 		},
-		"movementSpeed" : 1
+		"movementSpeed" : 5
 	},
 	"componentDataMap" : [
 		{
@@ -27,6 +27,10 @@
 		{
 			"className" : "URFLeague.Game.Entity.Attachable.Skill.DashComponent", 
 			"jsonDataPath" : "Data/Skills/normalDash"
+		},
+		{
+			"className" : "URFLeague.Game.Entity.Attachable.Skill.CutComponent", 
+			"jsonDataPath" : "Data/Skills/normalCut"
 		}
 	]
 }

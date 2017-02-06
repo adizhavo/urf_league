@@ -43,11 +43,10 @@ namespace URFLeague.Util.Data
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public struct ClassDataMap
     {
         public string className;
-        public string dataClassName;
         public string jsonDataPath;
     }
 }
